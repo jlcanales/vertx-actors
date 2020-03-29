@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dev.imrafaelmerino</groupId>
+  <artifactId>vertx-processes</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+
+  <properties>
+    <MAVEN-SUREFIRE-PLUGIN.VERSION>2.22.1</MAVEN-SUREFIRE-PLUGIN.VERSION>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <MAVEN-COMPILER-PLUGIN.VERSION>3.1</MAVEN-COMPILER-PLUGIN.VERSION>
+    <MAVEN-COMPILER-PLUGIN.SOURCE>11</MAVEN-COMPILER-PLUGIN.SOURCE>
+    <MAVEN-COMPILER-PLUGIN.TARGET>11</MAVEN-COMPILER-PLUGIN.TARGET>
+    <VERTX-VERSION>4.0.0-milestone4</VERTX-VERSION>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${MAVEN-COMPILER-PLUGIN.VERSION}</version>
+        <configuration>
+          <source>${MAVEN-COMPILER-PLUGIN.SOURCE}</source>
+          <target>${MAVEN-COMPILER-PLUGIN.TARGET}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${MAVEN-SUREFIRE-PLUGIN.VERSION}</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-unit</artifactId>
+      <version>${VERTX-VERSION}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.imrafaelmerino</groupId>
+      <artifactId>json-values</artifactId>
+      <version>7.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <version>${VERTX-VERSION}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-junit5</artifactId>
+      <version>${VERTX-VERSION}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.29</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.7.29</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
