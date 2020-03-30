@@ -1,4 +1,4 @@
-package dev.actors.actors.performance;
+package actors.performance;
 
 import actors.ActorsModule;
 import io.vertx.core.*;

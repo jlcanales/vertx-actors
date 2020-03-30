@@ -1,4 +1,4 @@
-package dev.actors.actors.performance;
+package actors.performance;
 
 import io.vertx.core.Vertx;
 import org.openjdk.jmh.annotations.*;

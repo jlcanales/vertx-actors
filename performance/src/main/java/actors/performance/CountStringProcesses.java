@@ -1,4 +1,4 @@
-package dev.actors.actors.performance;
+package actors.performance;
 
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
-import static dev.actors.actors.performance.Module.*;
+import static actors.performance.Module.*;
 
 public class CountStringProcesses implements Consumer<Message<Integer>>
 {
