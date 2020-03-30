@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.imrafaelmerino</groupId>
-  <artifactId>vertx-processes-performance</artifactId>
+  <artifactId>vertx-actors-performance</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
@@ -75,8 +75,8 @@
   <dependencies>
     <dependency>
       <groupId>dev.imrafaelmerino</groupId>
-      <artifactId>vertx-processes</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <artifactId>vertx-actors</artifactId>
+      <version>[0.1-]</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

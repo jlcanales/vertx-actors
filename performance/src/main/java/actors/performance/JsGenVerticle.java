@@ -1,4 +1,4 @@
-package dev.actors.actors.performance;
+package actors.performance;
 
 import io.vertx.core.eventbus.Message;
 import org.slf4j.Logger;

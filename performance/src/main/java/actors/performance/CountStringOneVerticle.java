@@ -1,4 +1,4 @@
-package dev.actors.actors.performance;
+package actors.performance;
 
 import io.vertx.core.eventbus.Message;
 import jsonvalues.JsObj;
@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static dev.actors.actors.performance.Functions.*;
+import static actors.performance.Functions.*;
 
 public class CountStringOneVerticle implements Consumer<Message<Integer>>
 {

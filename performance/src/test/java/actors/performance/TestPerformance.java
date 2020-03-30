@@ -1,6 +1,6 @@
-package imrafaelmerino;
+package actors.performance;
 
-import dev.actors.actors.performance.Module;
+import actors.performance.Module;
 import io.vertx.core.Vertx;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
