@@ -48,6 +48,7 @@ public class Actors
 
   /**
   Creates a factory to deploy and spawn verticles
+   @param vertx the vertx instance
    */
   public Actors(final Vertx vertx)
   {
