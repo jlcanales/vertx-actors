@@ -6,15 +6,19 @@ import io.vertx.core.json.DecodeException;
 import jsonvalues.JsObj;
 import jsonvalues.MalformedJson;
 
-
+/**
+ Codec that allows to send {@link JsObj} as messages
+ */
 public class JsObjValCodec implements MessageCodec<JsObj,JsObj>{
 
+  public static JsObjValCodec INSTANCE = new JsObjValCodec();
+
+  private JsObjValCodec(){};
   @Override
   public JsObj decodeFromWire(int pos,
                               final Buffer buffer
                              )
   {
-
     try
     {
       int length = buffer.getInt(pos);

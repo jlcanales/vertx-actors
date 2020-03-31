@@ -310,12 +310,12 @@ public class Actors
   {
     vertx.eventBus()
          .registerDefaultCodec(JsObj.class,
-                               new JsObjValCodec()
+                               JsObjValCodec.INSTANCE
                               );
 
     vertx.eventBus()
          .registerDefaultCodec(JsArray.class,
-                               new JsArrayValCodec()
+                               JsArrayValCodec.INSTANCE
                               );
   }
 

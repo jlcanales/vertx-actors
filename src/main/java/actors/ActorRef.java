@@ -15,11 +15,12 @@ import java.util.function.Function;
 import static java.util.Objects.requireNonNull;
 
 /**
- It represents a reference to a Verticle, the unit of computation. It allows you to send message
- to the Verticle with the tell method, or establish conversations with the ask method.
+ It represents a reference to an actor, the unit of computation. It allows to send messages
+ to the actor with the method {@link #tell(DeliveryOptions)}, or establish conversations with the
+ method {@link #ask(DeliveryOptions)}.
 
- @param <I> the type of the message sent to the verticle
- @param <O> the type of the message returned by the verticle
+ @param <I> the type of the input message sent to this actor
+ @param <O> the type of the output message returned by this actor
  */
 public class ActorRef<I, O>
 {
@@ -30,11 +31,12 @@ public class ActorRef<I, O>
    */
   private static final DeliveryOptions DEFAULT = new DeliveryOptions();
   /**
-   address where a Verticle is listening to
+   address where an actor is listening on
    */
   public final String address;
   /**
-   the identifiers assigned to the different instances of the Verticle after being deployed
+   the identifiers assigned to the different instances of this actor after being deployed.
+   To undeploy an actor, its identifier is needed.
    */
   public final Set<String> ids;
 
@@ -49,7 +51,8 @@ public class ActorRef<I, O>
   }
 
   /**
-   Method to establish a conversation with the verticle
+   Method to establish a conversation with this actor: a message is sent and then a message is
+   received.
    @param options the delivery options
    @return a function that takes an object of type I and returns an object of type O wrapped in a
    future
@@ -64,7 +67,8 @@ public class ActorRef<I, O>
   }
 
   /**
-   Method to establish a conversation with the verticle
+   Method to establish a conversation with this actor: a message is sent and then a message is
+   received.
    @return a function that takes an object of type I and returns an object of type O wrapped in a
    future
    */
@@ -75,7 +79,7 @@ public class ActorRef<I, O>
 
 
   /**
-   Method to send a message to the verticle.
+   Method to send a message to this actor.
    @param options the delivery options
    @return a consumer that takes an object of type I
    */
@@ -89,7 +93,7 @@ public class ActorRef<I, O>
   }
 
   /**
-   Method to send a message to the verticle.
+   Method to send a message to this actor.
    @return a consumer that takes an object of type I
    */
   public Consumer<I> tell()
@@ -98,8 +102,8 @@ public class ActorRef<I, O>
   }
 
   /**
-   Undeploy all the verticle instances
-   @return a future
+   Undeploy all the instances of this actor
+   @return a future that will be completed when all the instances are undeployed
    */
   public Future<Void> undeploy()
   {

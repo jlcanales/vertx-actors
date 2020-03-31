@@ -9,6 +9,11 @@ import jsonvalues.MalformedJson;
 
  public class JsArrayValCodec implements MessageCodec<JsArray,JsArray>{
 
+
+   public static JsArrayValCodec INSTANCE = new JsArrayValCodec();
+
+   private JsArrayValCodec(){};
+
   @Override
   public JsArray decodeFromWire(int pos,
                                 final Buffer buffer

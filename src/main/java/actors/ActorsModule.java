@@ -4,22 +4,22 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- Verticle that acts as a module exposing all the deployed verticles. Any non standard message can
- be sent registering a codec overwriting the method registerMessageCodecs.
+ Actor that acts as a module deploying and exposing all the deployed actors. Any non standard message
+ can be sent registering a codec overwriting the method {@link #registerMessageCodecs(Vertx)}.
  */
 public abstract class ActorsModule extends AbstractVerticle
 {
 
   /**
-   The purpose of this method is to initialize the functions/consumers/suppliers defined in the
+   The purpose of this method is to initialize the functions/consumers/suppliers defined in
    static fields of this class that will be exposed.
-   @param futures the list of VerticlesRef wrapped in futures that were deployed by the method
-   deployActors
+   @param futures the list of ActorRef wrapped in futures that were returned by the method
+   {@link #defineActors(List)}}.
    */
   protected abstract void defineActors(final List<Object> futures);
 
   /**
-   deploy all the verticles of the module
+   deploy all the actors of the module using the factory {@link Actors}
    @return a list of ActorRef wrapped in futures
    */
   //CompositeFuture.all method takes a list of futures with no generic type specified, that's why
@@ -27,7 +27,7 @@ public abstract class ActorsModule extends AbstractVerticle
   protected abstract List<Future> deployActors();
 
   /**
-   Factory to deploy or spawn verticles
+   Factory to deploy or spawn actors
    */
   protected Actors actors;
 
@@ -53,7 +53,7 @@ public abstract class ActorsModule extends AbstractVerticle
   /**
    Overwrite this method to register all the message codecs if you want to send any non standard
    message across the event bus.
-   @param vertx the vertx instance where he module will be deployed
+   @param vertx the vertx instance where the module will be deployed
    */
   protected void registerMessageCodecs(final Vertx vertx)
   {
@@ -76,9 +76,9 @@ public abstract class ActorsModule extends AbstractVerticle
   }
 
   /**
-   Call this method from the defineActors method to initialize the actors exposed by
-   this module that were deployed in the deployActors method
-   @param object object result of deploying or spawing an actor
+   Call this method from the {@link #defineActors(List)} method to cast every object of the list into
+   its real type {@link ActorRef}
+   @param object object result of deploying or spawing an actor with the factory {@link Actors}
    @param <I> the type of the input message
    @param <O> the type of the output message
    @return an ActorRef

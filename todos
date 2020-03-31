@@ -1,0 +1,8 @@
+borrar todo file y crear issues
+
+test para comprobar que crear varios Actors no es un problema, podría pasar
+que se registran varias veces los mismos codecs
+
+javadoc en codecs
+
+javadoc en package
