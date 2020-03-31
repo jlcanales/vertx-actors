@@ -1,5 +1,8 @@
 language: java
-install: mvn install -DskipTests
+env:
+  global:
+    - GPG_EXECUTABLE=gpg
+install: mvn -X install -DskipTests
 before_install:
   - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
   - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
@@ -10,7 +13,7 @@ cache:
     - $HOME/.m2
 deploy:
   - provider: script
-    script: mvn deploy --settings .travis/settings.xml -DskipTests=true -B -U -Prelease
+    script: mvn -X deploy --settings .travis/settings.xml -DskipTests=true -B -U -Prelease
     skip_cleanup: true
     on:
       repo: imrafaelmerino/vertx-actors
