@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Random;
 import java.util.function.Consumer;
 
-public class JsGenVerticle implements Consumer<Message<String>>
+/**
+ Generates a JsObj waiting for the specified time
+ */
+public class JsGenVerticle implements Consumer<Message<Integer>>
 {
 
   private Logger LOGGER = LoggerFactory.getLogger(JsGenVerticle.class);
@@ -15,13 +18,22 @@ public class JsGenVerticle implements Consumer<Message<String>>
   private final Random random = new Random();
 
   @Override
-  public void accept(final Message<String> message)
+  public void accept(final Message<Integer> message)
   {
     LOGGER.info("Received req");
-    message.reply(Functions.generator
-                    .apply(random)
-                    .get()
-                 );
-    LOGGER.info("Sending resp");
+    try
+    {
+      Thread.sleep(message.body());
+      message.reply(Functions.generator
+                      .apply(random)
+                      .get()
+                   );
+      LOGGER.info("Sending resp");
+    }
+    catch (InterruptedException e)
+    {
+      throw new RuntimeException(e);
+    }
+
   }
 }

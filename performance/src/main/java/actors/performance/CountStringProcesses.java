@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import static actors.performance.Functions.TIME_WAITING_MS;
 import static actors.performance.Module.*;
 
 public class CountStringProcesses implements Consumer<Message<Integer>>
@@ -30,7 +31,7 @@ public class CountStringProcesses implements Consumer<Message<Integer>>
     for (int i = 0; i < req.body(); i++)
     {
       futures.add(generatorProcess.get()
-                                  .apply("")
+                                  .apply(TIME_WAITING_MS)
                                   .flatMap(obj -> filterProcess.get()
                                                                .apply(obj)
                                                                .flatMap(a -> mapProcess.get()
@@ -44,7 +45,8 @@ public class CountStringProcesses implements Consumer<Message<Integer>>
     CompositeFuture.all(futures)
                    .onComplete(r ->
                                {
-                                 final List<Integer> counts = r.result().list();
+                                 final List<Integer> counts = r.result()
+                                                               .list();
                                  final int sum = sum(counts);
                                  total += sum;
                                  req.reply(sum);

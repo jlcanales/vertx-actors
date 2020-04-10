@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static actors.performance.Functions.TIME_WAITING_MS;
 import static actors.performance.Module.*;
 
 public class CountStringMultiVerticle implements Consumer<Message<Integer>>
@@ -31,7 +32,7 @@ public class CountStringMultiVerticle implements Consumer<Message<Integer>>
     for (int i = 0; i < req.body(); i++)
     {
 
-      futures.add(generator.get().flatMap(obj -> filter.apply(obj)
+      futures.add(generator.apply(TIME_WAITING_MS).flatMap(obj -> filter.apply(obj)
                                                        .flatMap(a -> map.apply(a))
                                                        .flatMap(b -> reduce.apply(b))
                                          )

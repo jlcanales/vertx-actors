@@ -2,6 +2,7 @@ package actors.performance;
 
 import actors.ActorsModule;
 import io.vertx.core.*;
+import io.vertx.core.json.JsonObject;
 import jsonvalues.JsObj;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,16 @@ public class Module extends ActorsModule
   public static Function<Integer, Future<Integer>> countStringsMultiVerticles;
   public static Function<JsObj, Future<JsObj>> filter;
   public static Supplier<Function<JsObj, Future<JsObj>>> filterProcess;
-  public static Supplier<Future<JsObj>> generator;
-  public static Supplier<Function<String, Future<JsObj>>> generatorProcess;
+  public static Function<Integer,Future<JsObj>> generator;
+  public static Supplier<Function<Integer, Future<JsObj>>> generatorProcess;
   public static Function<JsObj, Future<JsObj>> map;
   public static Supplier<Function<JsObj, Future<JsObj>>> mapProcess;
   public static Function<JsObj, Future<Integer>> reduce;
   public static Supplier<Function<JsObj, Future<Integer>>> reduceProcess;
+  public static Function<JsObj,Future<JsObj>> id;
+  public static Function<String,Future<JsObj>> parser;
+  public static Function<JsonObject,Future<JsonObject>> jacksonId;
+  public static Function<String,Future<JsonObject>> jacksonParser;
 
   @Override
   protected void defineActors(final List<Object> list)
@@ -36,13 +41,21 @@ public class Module extends ActorsModule
 
     reduce = this.<JsObj, Integer>toActorRef(list.get(2)).ask();
 
-    generator = () -> this.<String, JsObj>toActorRef(list.get(3)).ask().apply("");
+    generator = this.<Integer, JsObj>toActorRef(list.get(3)).ask();
 
     countStringsOneVerticle = this.<Integer, Integer>toActorRef(list.get(4)).ask();
 
     countStringsMultiVerticles = this.<Integer, Integer>toActorRef(list.get(5)).ask();
 
     countStringsMultiProcesses = this.<Integer, Integer>toActorRef(list.get(6)).ask();
+
+    id = this.<JsObj,JsObj>toActorRef(list.get(7)).ask();
+
+    jacksonId = this.<JsonObject,JsonObject>toActorRef(list.get(8)).ask();
+
+    parser = this.<String,JsObj>toActorRef(list.get(9)).ask();
+
+    jacksonParser = this.<String,JsonObject>toActorRef(list.get(10)).ask();
 
     filterProcess = actors.spawn(Functions.filter);
 
@@ -51,6 +64,7 @@ public class Module extends ActorsModule
     reduceProcess = actors.spawn(Functions.reduce);
 
     generatorProcess = actors.spawn(new JsGenVerticle());
+
   }
 
 
@@ -72,7 +86,14 @@ public class Module extends ActorsModule
                                       ),
                          actors.deploy(new CountStringProcesses(),
                                        WORKER
-                                       )
+                                       ),
+                         actors.deploy(Functions.id),
+
+                         actors.deploy(Functions.jacksonId),
+
+                         actors.deploy(Functions.parser),
+
+                         actors.deploy(Functions.jacksonParser)
                         );
   }
 

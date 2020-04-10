@@ -4,8 +4,11 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.eventbus.MessageConsumer;
+import io.vertx.core.eventbus.ReplyFailure;
 
 import java.util.function.Consumer;
+
+import static io.vertx.core.eventbus.ReplyFailure.RECIPIENT_FAILURE;
 
 /**
  Represents an actor, which is a Verticle in Vertx jargon. It's the unit of computation.
@@ -46,7 +49,19 @@ public class Actor<I> extends AbstractVerticle
     {
       messageConsumer = vertx.eventBus()
                              .consumer(address,
-                                       m -> this.consumer.accept((Message<I>) m)
+                                       m ->
+                                       {
+                                         try
+                                         {
+                                           this.consumer.accept((Message<I>) m);
+                                         }
+                                         catch (Exception e)
+                                         {
+                                           m.fail(RECIPIENT_FAILURE.toInt(),
+                                                  e.toString()+" @ "+e.getStackTrace()[0]
+                                                 );
+                                         }
+                                       }
                                       );
       promise.complete();
     }
@@ -67,7 +82,7 @@ public class Actor<I> extends AbstractVerticle
   {
     try
     {
-      if(messageConsumer!=null && messageConsumer.isRegistered())
+      if (messageConsumer != null && messageConsumer.isRegistered())
         messageConsumer.unregister(promise);
       else promise.complete();
     }

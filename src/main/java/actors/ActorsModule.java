@@ -14,7 +14,7 @@ public abstract class ActorsModule extends AbstractVerticle
    The purpose of this method is to initialize the functions/consumers/suppliers defined in
    static fields of this class that will be exposed.
    @param futures the list of ActorRef wrapped in futures that were returned by the method
-   {@link #defineActors(List)}}.
+   {@link #deployActors()}}.
    */
   protected abstract void defineActors(final List<Object> futures);
 

@@ -10,8 +10,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <MAVEN-COMPILER-PLUGIN.VERSION>3.1</MAVEN-COMPILER-PLUGIN.VERSION>
-    <MAVEN-COMPILER-PLUGIN.SOURCE>11</MAVEN-COMPILER-PLUGIN.SOURCE>
-    <MAVEN-COMPILER-PLUGIN.TARGET>11</MAVEN-COMPILER-PLUGIN.TARGET>
+    <MAVEN-COMPILER-PLUGIN.SOURCE>8</MAVEN-COMPILER-PLUGIN.SOURCE>
+    <MAVEN-COMPILER-PLUGIN.TARGET>8</MAVEN-COMPILER-PLUGIN.TARGET>
     <JAVAX-ANNOTATION-VERSION>1.3.2</JAVAX-ANNOTATION-VERSION>
     <MAVEN-SUREFIRE-PLUGIN.VERSION>2.22.1</MAVEN-SUREFIRE-PLUGIN.VERSION>
     <LOG4J.VERSION>2.13.0</LOG4J.VERSION>
@@ -74,7 +74,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>dev.imrafaelmerino</groupId>
+      <groupId>com.github.imrafaelmerino</groupId>
       <artifactId>vertx-actors</artifactId>
       <version>[0.1-]</version>
       <scope>compile</scope>

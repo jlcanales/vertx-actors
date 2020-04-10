@@ -1,7 +1,4 @@
 language: java
-env:
-  global:
-    - GPG_EXECUTABLE=gpg
 install: mvn -X install -DskipTests
 before_install:
   - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import

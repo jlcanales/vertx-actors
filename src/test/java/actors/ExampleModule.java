@@ -1,15 +1,13 @@
 package actors;
-import actors.ActorsModule;
 import io.vertx.core.*;
 import io.vertx.core.eventbus.Message;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ModuleExample extends ActorsModule
+public class ExampleModule extends ActorsModule
 {
 
   public static Function<Integer,Future<Integer>> triple;
@@ -40,12 +38,4 @@ public class ModuleExample extends ActorsModule
                          actors.deploy(printNumber)
                         );
   }
-
-  @Override
-  protected void registerMessageCodecs(final Vertx vertx)
-  {
-   //no codecs to register
-  }
-
-
 }
