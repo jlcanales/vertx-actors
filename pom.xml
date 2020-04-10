@@ -7,7 +7,26 @@
   <artifactId>vertx-actors</artifactId>
   <packaging>jar</packaging>
   <version>0.1</version>
-
+  <name>vertx-actors</name>
+  <description>vertx-actors is a lightweight library to work with Vertx following a functional style and the Earlang philosophy based on actors. </description>
+  <url>https://github.com/imrafaelmerino/vertx-actors</url>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>imrafaelmerino</id>
+      <name>Rafael Merino García</name>
+      <email>imrafael.merino@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <url>https://github.com/imrafaelmerino/vertx-actors.git</url>
+  </scm>
 
   <properties>
     <NEXUS-STAGING-MAVEN-PLUGIN.VERSION>1.6.8</NEXUS-STAGING-MAVEN-PLUGIN.VERSION>
