@@ -49,21 +49,21 @@ public class Actor<I> extends AbstractVerticle
     {
       messageConsumer = vertx.eventBus()
                              .consumer(address,
-                                       m ->
+                                       message ->
                                        {
                                          try
                                          {
-                                           this.consumer.accept((Message<I>) m);
+                                           this.consumer.accept((Message<I>) message);
                                          }
                                          catch (Exception e)
                                          {
-                                           m.fail(RECIPIENT_FAILURE.toInt(),
+                                           message.fail(RECIPIENT_FAILURE.toInt(),
                                                   e.toString()+" @ "+e.getStackTrace()[0]
                                                  );
                                          }
                                        }
                                       );
-      promise.complete();
+        messageConsumer.completionHandler(promise);
     }
 
     catch (Exception e)

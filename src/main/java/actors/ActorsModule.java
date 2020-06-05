@@ -37,7 +37,7 @@ public abstract class ActorsModule extends AbstractVerticle
 
     try
     {
-      actors = new Actors(Objects.requireNonNull(vertx));
+      actors = new Actors(Objects.requireNonNull(getVertx()));
       registerMessageCodecs(vertx);
       CompositeFuture.all(deployActors())
                      .onComplete(result -> failIfErrorOrInitModule(start,
@@ -59,21 +59,21 @@ public abstract class ActorsModule extends AbstractVerticle
   {
   }
 
-  private void failIfErrorOrInitModule(final Promise<Void> start,
-                                       final AsyncResult<CompositeFuture> result
-                                      )
-  {
-    if (result.failed()) start.fail(result.cause());
-    try
+    private void failIfErrorOrInitModule(final Promise<Void> start,
+                                         final AsyncResult<CompositeFuture> result
+                                        )
     {
-      defineActors(result.result().list());
-      start.complete();
+        if (result.failed()) {
+            start.fail(result.cause());
+        } else {
+            try {
+                defineActors(result.result().list());
+                start.complete();
+            } catch (Exception e) {
+                start.fail(e);
+            }
+        }
     }
-    catch (Exception e)
-    {
-      start.fail(e);
-    }
-  }
 
   /**
    Call this method from the {@link #defineActors(List)} method to cast every object of the list into
