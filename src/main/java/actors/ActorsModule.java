@@ -64,6 +64,7 @@ public abstract class ActorsModule extends AbstractVerticle
                                       )
   {
     if (result.failed()) start.fail(result.cause());
+    else
     try
     {
       defineActors(result.result().list());

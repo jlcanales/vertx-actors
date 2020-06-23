@@ -1,6 +1,8 @@
 package actors;
 import io.vertx.core.*;
 import io.vertx.core.eventbus.Message;
+import jsonvalues.JsObj;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -9,6 +11,14 @@ import java.util.function.Supplier;
 
 public class ExampleModule extends ActorsModule
 {
+
+
+
+  Function<String, JsObj> getCustomer;
+
+  public ExampleModule(final Function<String, JsObj> getCustomer) {
+    this.getCustomer = getCustomer;
+  }
 
   public static Function<Integer,Future<Integer>> triple;
   public static Supplier<Function<Integer,Future<Integer>>> quadruple;

@@ -86,10 +86,10 @@ public class ActorRef<I, O>
   public Consumer<I> tell(final DeliveryOptions options)
   {
     requireNonNull(options);
-    return body -> vertx.eventBus().<I>request(address,
-                                               body,
-                                               options
-                                              ).map(Message::body);
+    return body -> vertx.eventBus().send(address,
+                                         body,
+                                         options
+                                        );
   }
 
   /**
