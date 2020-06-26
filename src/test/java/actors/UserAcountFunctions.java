@@ -1,5 +1,6 @@
 package actors;
 
+import actors.future.JsObjFuture;
 import jsonvalues.JsObj;
 import jsonvalues.JsPath;
 
@@ -17,4 +18,7 @@ public class UserAcountFunctions
   public static Function<JsObj, JsObj> register = user -> user.put(JsPath.fromKey("id"),
                                                                    random.nextInt()
                                                                   );
+
+
+
 }

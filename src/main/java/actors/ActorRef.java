@@ -87,9 +87,9 @@ public class ActorRef<I, O>
   {
     requireNonNull(options);
     return body -> vertx.eventBus().send(address,
-                                               body,
-                                               options
-                                              );
+                                         body,
+                                         options
+                                        );
   }
 
   /**

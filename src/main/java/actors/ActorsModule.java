@@ -59,9 +59,11 @@ public abstract class ActorsModule extends AbstractVerticle
   {
   }
 
-    private void failIfErrorOrInitModule(final Promise<Void> start,
-                                         final AsyncResult<CompositeFuture> result
-                                        )
+
+  private void failIfErrorOrInitModule(final Promise<Void> start,
+                                       final AsyncResult<CompositeFuture> result
+                                      )
+
     {
         if (result.failed()) {
             start.fail(result.cause());
